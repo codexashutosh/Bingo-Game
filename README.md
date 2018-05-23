@@ -1,7 +1,7 @@
 # Bingo-Game
 A  game coded with Python
 
-# Inroduction
+# Introduction
 This is a basic desktop game currently in its very initial stage. I am working on adding more efficient algorithms. For now it is just as simply coded as it could be to fulfill the necessary requirements for the game.
 
 # Description
