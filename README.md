@@ -9,13 +9,13 @@ This is a basic desktop game currently in its very initial stage. I am working o
   2. Install python3 Tkinter module
   
 # Requirements Installation Procedure For Linux
->> Check if python is already installed or not.
->> Type the following code in Terminal and press ENTER: 
+1. Check if python is already installed or not.
+2. Type the following code in Terminal and press ENTER: 
     python3
->> If it says python3 is not installed, then type the following code in Terminal and press ENTER:
+3. If it says python3 is not installed, then type the following code in Terminal and press ENTER:
     sudo apt-get install python python3-tk
->> The above code will install both python and Tkinter module for python3 together.
->> If python is already installed, then type the following code in Terminal and press ENTER:
+4. The above code will install both python and Tkinter module for python3 together.
+5. If python is already installed, then type the following code in Terminal and press ENTER:
     sudo apt-get install python3-tk
   
 # Description
