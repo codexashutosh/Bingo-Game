@@ -1,24 +1,24 @@
 # Bingo-Game
 A  game coded with Python
 
-# Introduction
+## Introduction
 This is a basic desktop game currently in its very initial stage. I am working on adding more efficient algorithms. For now it is just as simply coded as it could be to fulfill the necessary requirements for the game.
 
-# Requirements
+## Requirements
   1. Install python
   2. Install python3 Tkinter module
   
-# Requirements Installation Procedure For Linux
-1. Check if python is already installed or not.
-2. Type the following code in Terminal and press ENTER: 
-    python3
-3. If it says python3 is not installed, then type the following code in Terminal and press ENTER:
-    sudo apt-get install python python3-tk
-4. The above code will install both python and Tkinter module for python3 together.
-5. If python is already installed, then type the following code in Terminal and press ENTER:
-    sudo apt-get install python3-tk
+### Install requirements in Linux
+* Check if python is already installed or not.
+* Type the following code in Terminal and press ENTER:<br/> 
+    `python3`
+* If it says python3 is not installed, then type the following code in Terminal and press ENTER:<br/>
+    `sudo apt-get install python python3-tk`
+* The above code will install both python and Tkinter module for python3 together.
+* If python is already installed, then type the following code in Terminal and press ENTER:<br/>
+    `sudo apt-get install python3-tk`
   
-# Description
+## Description
 The short version of the following description is explained in the beginning of the game.
 1. Enter your username
 2. Create your 5x5 Bingo Grid
@@ -26,4 +26,4 @@ The short version of the following description is explained in the beginning of 
 4. The numbers must be entered one by one i.e. one row after another according to your tactics (Just press enter after each input, the code will automatically set your 25 inputs in the right way, as a 5x5 matrix) and the games starts!
 5. Try to cross out 5 rows and/or columns before your opponent (i.e. the PC)
 6. You can only enter one number of choice at a time
-7. In the end the winner will be declared
+7. In the end the winner will be declared.
