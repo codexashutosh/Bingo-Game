@@ -2,7 +2,7 @@
 A  game coded with Python
 
 ## Introduction
-This is a basic desktop game currently in its very initial stage. I am working on adding more efficient algorithms. For now it is just as simply coded as it could be to fulfill the necessary requirements for the game.
+This is a Terminal-based game currently in its initial stage. I am working on adding more efficient algorithms. For now it is just as simply coded as it could be to satisfy the necessary functionalities of the game.
 
 ## Requirements
   1. Install python
