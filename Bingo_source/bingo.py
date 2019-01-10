@@ -14,8 +14,6 @@ win.title("Bingo")
 win.geometry("400x200")
 win.resizable(0, 0)
 
-messagebox.showinfo('BINGO', 'Get Ready!')
-
 back = tk.Frame(master=win, bg='black', highlightbackground="green", highlightcolor="green", highlightthickness=1, bd=0)
 back.pack_propagate(0)  # Don't allow the widgets inside to determine the frame's width / height
 back.pack(fill=tk.BOTH, expand=1)  # Expand the frame to fill the root window
@@ -34,21 +32,52 @@ action.pack()
 
 win.mainloop()
 
+# Bingo Game banner
+def banner():
+	print("""
+     ________    _______________
+    |   ___  \\  /              /
+    |  |   \\  |/              /\\
+    |  |   |  |__  ___     __/ _\\____   ______
+    |  |__/  /|  |/   \\   |  |/  ____\\ /  __  \\
+    |   __  < |  |     \\  |  |  |     |  |  |  |
+    |  |  \\  \\|  |  |\\  \\ |  |  |  ___|  |  |  |
+    |  |   |  |  |  | \\  \\|  |  | /_  |  |  |  |
+    |  |___/  |  |  |  \\     |  |__/  |  |__|  |
+    |________/|__|\\_|  /\\___/ \\______/\\\\______/
+      /               /\\               \\
+     /______GAME_____/OF\\____NUMBERS____\\
+""")
+
 # Create the User's Bingo Grid
 def userGrid():
     x = []
+    errCount = 0
     while(1):
-        u = input("        ")
+        if(errCount == 4):
+    	    print("""
+	    	AM I A JOKE TO YOU? 
+	    Common! Gather your senses!
+	    """)
+    	    errCount = 0
+        u = input("    ")
+        if u in ['a','A']:
+        	x = compGrid()
+        	errCount = 0
+        	return(x)
         if u.isnumeric():
             n = int(u)
         else:
-            print("     Please! Enter an integer in range of 1 to 25.")
+            print("    Please! Enter an integer in range of 1 to 25.")
+            errCount+=1
             continue
         if n not in range(1,26):
-            print("     LOL! The range is 1 to 25. Try again!")
+            print("    LOL! The range is 1 to 25. Try again!")
+            errCount+=1
             continue
         if n in x:
-            print("     YOU HAVE ALREADY ADDED {0} TO YOUR GRID".format(n))
+            print("    You have alrady added {0} to your grid".format(n))
+            errCount+=1
             continue
         x = x + [n]
         if len(x) == 25:
@@ -185,10 +214,22 @@ def checkStatus(x,y,statX,statY,cx,rx,cy,ry):
 
 # main program
 if __name__=="__main__":
-    print("\n			BINGO\n\n		The Game Of Numbers!\n\n")
-    name = input("	  Enter your name: ")
-    print("\n  Hello " + name + "! Let's create your Bingo Grid!\n\n	Enter your 5 rows sequentially:\n")
-    x = userGrid()
+    global finalResult, name
+    banner()
+    name = input("    Enter your name: ").upper()
+    print("\n  Hello " + name + "! Welcome to Bingo.")
+    while(1):
+    	gridType = input("\n  Create grid automatically or manually? (Enter 'a' for automatic or 'm' for manual): ")
+    	if (gridType not in ['a','A','m','M']): 
+    		print("  NOTE: Press 'a' for automatic or 'm' for manual.")
+    		continue
+    	if gridType in ['a','A']: 
+    		x = compGrid()
+    		break
+    	else: 
+		    print("\n  Let's create your Bingo Grid!\n\n  Enter your 5 rows sequentially (You can still create grid automatically- Type 'a' and press ENTER, anytime.):\n")
+		    x = userGrid()
+		    break
     y = compGrid()
     statX = 0
     statY = 0
@@ -196,48 +237,52 @@ if __name__=="__main__":
     rx = []
     cy = []
     ry = []
-    print("\n   Your Bingo Grid is:\n")
+    print("\n  Your Bingo Grid is:\n")
     displayGrid(x)
-    print("\n   Computer has also created its Bingo Grid! Get ready!\n\n   Let's start with you then!\n")
+    print("\n  Computer has also created its Bingo Grid! Get ready!\n\n  Let's start with you then!\n")
     while(1):
-        u = input("\n   Enter the number of your choice: ")
+        u = input("\n  Enter the number of your choice: ")
         if u.isnumeric():
             n = int(u)
         else:
-            print("\n	 Please! Enter an integer in range of 1 to 25.\n")
+            print("\n  Please! Enter an integer in range of 1 to 25.\n")
             continue
         if n not in range(1,26):
-            print("\n    LOL! The range is 1 to 25. Try again!\n")
+            print("\n  LOL! The range is 1 to 25. Try again!\n")
             continue
         if n not in x:
-            print("\n    {0} is ALREADY CUT from your grid. See your grid above.\n".format(n))
+            print("\n  {0} is ALREADY CUT from your grid. See your grid above.\n".format(n))
             continue
         x,y = modifyByUserChoice(x,y,n)
-        print("\n   Your modified Grid:\n")
+        print("\n  Your modified Grid:\n")
         displayGrid(x)
         statX,statY,cx,rx,cy,ry = checkStatus(x,y,statX,statY,cx,rx,cy,ry)
         if statX >= 5:
-            print("\n   Congratulations " + name + "! YOU WON!\n")
-            print("\n   Final status of Computer's Grid:\n")
+            finalResult = 'u'
+            print("\n  Congratulations " + name + "! YOU WON!\n")
+            print("\n  Final status of Computer's Grid:\n")
             displayGrid(y)
             break
         if statY >= 5:
-            print("\n   BINGO! YOU LOSS " + name + "! BETTER LUCK NEXT TIME\n")
-            print("\n   Final status of Computer's Grid:\n")
+            finalResult = "c"
+            print("\n  BINGO " + name + "! YOU ARE DEFEATED! BETTER LUCK NEXT TIME.\n")
+            print("\n  Final status of Computer's Grid:\n")
             displayGrid(y)
             break
         x,y,n = modifyByCompLogChoice(x,y)
-        print("\n   Computer chose {0}. So, your modified Grid:\n".format(n))
+        print("\n  Computer chose {0}. So, your modified Grid is:\n".format(n))
         displayGrid(x)
         statX,statY,cx,rx,cy,ry = checkStatus(x,y,statX,statY,cx,rx,cy,ry)
         if statY >= 5:
-            print("\n   BINGO! YOU LOSS " + name + "! BETTER LUCK NEXT TIME\n")
-            print("\n   Final status of Computer's Grid:\n")
+            finalResult = 'c'
+            print("\n  BINGO " + name + "! YOU ARE DEFEATED! BETTER LUCK NEXT TIME.\n")
+            print("\n  Final status of Computer's Grid:\n")
             displayGrid(y)
             break
         if statX >= 5:
-            print("\n   Congratulations " + name + "! YOU WON!\n")
-            print("\n   Final status of Computer's Grid:\n")
+            finalResult = 'u'
+            print("\n  Congratulations " + name + "! YOU WON!\n")
+            print("\n  Final status of Computer's Grid:\n")
             displayGrid(y)
             break
 
@@ -251,13 +296,20 @@ win.title("Bingo")
 win.geometry("300x150")
 win.resizable(0,0)
 
-back = tk.Frame(master=win,bg='black', highlightbackground="green", highlightcolor="green", highlightthickness=1, bd=0)
+back = tk.Frame(master=win,bg='black', highlightbackground="yellow", highlightcolor="yellow", highlightthickness=1, bd=0)
 back.pack_propagate(0)
 back.pack(fill=tk.BOTH, expand=1)
 
-tk.Label(master=back,text="\nBINGO!\n", bg="black", fg="green").pack()
+if(finalResult == 'u'):
+	frtext = "\nBINGO " + name + "! YOU LOST!\n"
+elif(finalResult == 'c'):
+	frtext = "\nBINGO " + name + "! YOU WON!\n"
+else:
+	frtext = "\nBINGO " + name + "!\n"
+
+tk.Label(master=back,text=frtext, bg="black", fg="yellow").pack()
 confirmEnd="    Thank you! Hope you enjoyed the game.    \n    See the results in the end.    \n"
-tk.Label(master=back,text=confirmEnd,bg="black",fg="yellow").pack()
+tk.Label(master=back,text=confirmEnd,bg="black",fg="green").pack()
 
 def close_window():
     win.destroy()
