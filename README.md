@@ -1,4 +1,4 @@
-# Bingo Game
+# Bingo | Game Of Numbers
 A game coded with Python
 
 ## Introduction
