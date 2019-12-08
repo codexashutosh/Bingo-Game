@@ -301,9 +301,9 @@ back.pack_propagate(0)
 back.pack(fill=tk.BOTH, expand=1)
 
 if(finalResult == 'u'):
-	frtext = "\nBINGO " + name + "! YOU LOST!\n"
-elif(finalResult == 'c'):
 	frtext = "\nBINGO " + name + "! YOU WON!\n"
+elif(finalResult == 'c'):
+	frtext = "\nBINGO " + name + "! YOU LOST!\n"
 else:
 	frtext = "\nBINGO " + name + "!\n"
 
